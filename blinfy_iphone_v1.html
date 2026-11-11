@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blinfy">
+<title>Blinfy</title>
+<style>
+:root{--bg:#090909;--panel:#141414;--panel2:#1b1b1b;--line:#292929;--text:#f5f5f5;--muted:#929292;--red:#ef3434}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}button{cursor:pointer;color:inherit;border:0}
+.app{max-width:1120px;margin:auto;padding:22px 22px 110px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}.brand{font-size:27px;font-weight:850;letter-spacing:-1.5px}.brand b{color:var(--red)}.tag{color:var(--muted);font-size:12px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}.navbtn{background:transparent;color:#aaa;padding:10px 14px;border-radius:12px}.navbtn.active,.navbtn:hover{background:#211313;color:#fff}.navbtn.active{box-shadow:inset 0 0 0 1px #542323}
+h1{font-size:30px;letter-spacing:-1px;margin:0 0 6px}h2{font-size:20px;margin:0 0 14px}.sub{color:var(--muted);margin:0 0 22px}.hero{background:linear-gradient(120deg,#261010,#151111 55%,#111);border:1px solid #3b2020;border-radius:22px;padding:24px;margin-bottom:28px}.eyebrow{color:#ff7777;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700}.hero h1{margin:8px 0}.hero p{color:#c3b4b4;margin:0}.section{margin:26px 0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}.tile{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px;min-width:0}.cover{width:100%;aspect-ratio:1;border-radius:11px;background:linear-gradient(145deg,#3b1717,#171717 65%);display:flex;align-items:center;justify-content:center;overflow:hidden;color:#ff7777;font-size:32px;font-weight:800}.cover img{width:100%;height:100%;object-fit:cover}.tile strong{display:block;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tile small,.muted{color:var(--muted)}.row{display:flex;align-items:center;gap:12px}.grow{flex:1;min-width:0}.btn{background:var(--red);padding:11px 16px;border-radius:12px;font-weight:700}.btn.secondary{background:#242424;border:1px solid #363636}.btn.ghost{background:transparent;border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:not-allowed}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}.field{width:100%;background:#0e0e0e;border:1px solid #333;color:white;padding:13px 14px;border-radius:12px;outline:none}.field:focus{border-color:#a43a3a}.track{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #242424}.track:last-child{border:0}.mini{width:52px;height:52px;flex:none;border-radius:9px;background:#2b1515;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#ff7777;font-weight:800}.mini img{width:100%;height:100%;object-fit:cover}.trackname{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.trackmeta{font-size:12px;color:var(--muted)}.iconbtn{background:#252525;border:1px solid #373737;border-radius:10px;padding:8px 11px}.empty{padding:34px 18px;text-align:center;color:var(--muted);background:var(--panel);border:1px dashed #343434;border-radius:16px}.hidden{display:none!important}.player{position:fixed;bottom:0;left:0;right:0;background:#111e;border-top:1px solid #333;backdrop-filter:blur(18px);padding:12px max(18px,calc((100vw - 1080px)/2));display:flex;align-items:center;gap:14px;z-index:5}.player .mini{width:46px;height:46px;flex:0 0 46px}.playerinfo{min-width:0;flex:1}.mini-controls{display:flex;align-items:center;gap:12px;min-width:min(390px,42vw)}.mini-play{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#ff526d,#d91f48);color:white;font-size:15px;display:grid;place-items:center;box-shadow:0 4px 18px #ed315044;flex:0 0 38px}.mini-seek{width:100%;min-width:70px;accent-color:#f13c60;cursor:pointer;appearance:none;height:4px;border-radius:8px;background:linear-gradient(90deg,#f13c60 0%,#f13c60 var(--progress,0%),#454047 var(--progress,0%),#454047 100%);outline:none}.mini-seek::-webkit-slider-thumb{appearance:none;width:11px;height:11px;border-radius:50%;background:#ff5574;box-shadow:0 0 0 4px #ff557422}.mini-seek::-moz-range-thumb{width:11px;height:11px;border:0;border-radius:50%;background:#ff5574}.mini-time{font-size:11px;color:#aaa;min-width:34px;font-variant-numeric:tabular-nums}.volume-box{display:flex;align-items:center;gap:7px;flex:0 0 116px;color:#aaa}.volume-icon{display:flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px;background:transparent;color:#aaa;padding:3px;cursor:pointer}.volume-icon svg,.volume-symbol svg{display:block;width:22px;height:22px}.volume-seek{width:78px;min-width:0;accent-color:#f13c60;cursor:pointer;appearance:none;height:4px;border-radius:8px;background:linear-gradient(90deg,#f13c60 0%,#f13c60 var(--volume,70%),#454047 var(--volume,70%),#454047 100%);outline:none}.volume-seek::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;background:#ff5574}.volume-seek::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:#ff5574}.full-volume{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px auto 4px;color:#aaa;width:min(260px,80%)}.full-volume input{flex:1}.playerinfo strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.playerinfo small{color:var(--muted)}.uploadbox{border:1px dashed #4a3434;border-radius:16px;padding:22px;text-align:center;background:#151010}.filelabel{display:inline-block;margin-top:12px}.notice{color:var(--muted);font-size:12px;margin-top:12px}.playlistline{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid #292929}.playlistline:last-child{border:0}.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px;z-index:10}.modalbox{width:min(420px,100%);background:#171717;border:1px solid #393939;border-radius:18px;padding:20px}.modalbox h2{margin-bottom:16px}.modalactions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+@media(max-width:600px){.volume-box{flex-basis:90px;gap:4px}.volume-seek{width:48px}.volume-icon{width:24px;height:24px;flex-basis:24px;padding:1px}.volume-icon svg,.volume-symbol svg{width:20px;height:20px}.app{padding:17px 15px 115px}.top{margin-bottom:20px}.hero{padding:19px}h1{font-size:26px}.player{gap:9px;padding:10px}.mini-controls{min-width:120px;gap:7px}.mini-play{width:34px;height:34px;flex-basis:34px}.mini-time{display:none}.playerinfo small{font-size:11px}.navbtn{padding:9px 11px;font-size:13px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.full-player{position:fixed;inset:0;z-index:30;background:radial-gradient(ellipse at 50% 28%,#35151d 0%,#151014 42%,#080808 78%);display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
+.full-inner{width:min(560px,100%);display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.full-top{width:100%;display:flex;align-items:center;justify-content:space-between}
+.full-cover{width:min( min(68vw,390px), 48vh);aspect-ratio:1;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#551b2a,#171117 70%);box-shadow:0 18px 70px #0009;display:flex;align-items:center;justify-content:center;color:#ff7777;font-size:76px;font-weight:850}
+.full-cover img{width:100%;height:100%;object-fit:cover}
+.full-info{width:100%;text-align:left;display:flex;align-items:center;gap:12px;margin-top:8px}
+.full-title{font-size:25px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.full-artist{color:var(--muted);font-size:15px}
+.full-seek{width:100%;accent-color:var(--red);cursor:pointer}
+.full-times{width:100%;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.full-controls{display:flex;align-items:center;justify-content:center;gap:clamp(18px,6vw,36px);margin:8px 0 16px}
+.full-controls button{background:transparent;font-size:25px;color:#eee;padding:8px}
+.full-controls .main-play{width:64px;height:64px;border-radius:50%;background:#f5eaf0;color:#171117;font-size:26px}
+.full-queue{width:100%;text-align:left;background:#171519;border:1px solid #30272d;border-radius:18px;padding:14px}
+.full-close{background:#191519;border:1px solid #49313b;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;position:relative;flex:0 0 40px}.full-close::before{content:"";width:9px;height:9px;border-right:2px solid #f5eaf0;border-bottom:2px solid #f5eaf0;transform:translateY(-2px) rotate(45deg);display:block}
+.player{cursor:pointer}.player audio{cursor:default}
+@media(max-width:600px){.full-player{padding:16px}.full-cover{width:min(78vw,40vh)}.full-title{font-size:22px}}
+
+
+.full-cover img,.mini img{image-rendering:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.full-cover img{object-fit:cover}
+
+/* Blinfy iPhone layout */
+@media (max-width: 600px) {
+  body { padding-bottom: calc(142px + env(safe-area-inset-bottom)); }
+  .app {
+    width: 100%;
+    max-width: 100%;
+    padding: calc(14px + env(safe-area-inset-top)) 16px 24px;
+  }
+  .top { margin-bottom: 18px; }
+  .brand { font-size: 29px; }
+  .tag { font-size: 10px; letter-spacing: .7px; }
+  nav#nav {
+    position: fixed;
+    z-index: 20;
+    left: 0; right: 0; bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+    background: rgba(13,13,16,.96);
+    border-top: 1px solid #30242a;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+  }
+  .navbtn {
+    min-width: 0;
+    min-height: 48px;
+    padding: 7px 1px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 9px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .navbtn::before {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+  .navbtn[data-page="home"]::before { content: "⌂"; }
+  .navbtn[data-page="library"]::before { content: "▤"; }
+  .navbtn[data-page="playlists"]::before { content: "♫"; }
+  .navbtn[data-page="add"]::before { content: "+"; font-size: 22px; }
+  .navbtn[data-page="rooms"]::before { content: "◉"; }
+  .navbtn[data-page="profile"]::before { content: "○"; }
+  .navbtn.active {
+    color: #ff526d;
+    background: #241117;
+    box-shadow: none;
+  }
+  .hero {
+    padding: 20px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 { font-size: 25px; line-height: 1.12; }
+  .hero p { font-size: 13px; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 18px; }
+  .section { margin: 22px 0; }
+  .grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 11px; }
+  .tile { padding: 10px; }
+  .track { gap: 10px; padding: 10px 2px; }
+  .mini { width: 48px; height: 48px; }
+  .btn { min-height: 42px; padding: 10px 13px; }
+  .field { min-height: 46px; font-size: 16px; }
+  .uploadbox { padding: 22px 15px; }
+
+  /* Mini-player floats above the bottom navigation */
+  .player {
+    left: 9px; right: 9px;
+    bottom: calc(72px + env(safe-area-inset-bottom));
+    padding: 9px 10px;
+    gap: 8px;
+    border: 1px solid #49303a;
+    border-radius: 16px;
+    background: rgba(24,18,22,.97);
+    box-shadow: 0 8px 30px #0009;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .player .mini { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 9px; }
+  .playerinfo { flex: 1 1 auto; min-width: 0; }
+  .playerinfo strong { font-size: 12px; }
+  .playerinfo small { display: block; font-size: 10px; }
+  .mini-controls { min-width: 0; flex: 0 0 auto; gap: 6px; }
+  .mini-play { width: 34px; height: 34px; flex-basis: 34px; }
+  .mini-controls .mini-seek,
+  .mini-controls .mini-time { display: none; }
+  .volume-box { display: none; }
+
+  .full-player {
+    padding: calc(14px + env(safe-area-inset-top)) 20px calc(18px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .full-inner { width: 100%; max-width: 430px; gap: 13px; }
+  .full-cover { width: min(76vw, 38vh, 340px); border-radius: 22px; }
+  .full-info { margin-top: 4px; }
+  .full-title { font-size: 22px; }
+  .full-controls { margin: 4px 0 8px; }
+  .full-queue { margin-bottom: 8px; }
+  .full-volume { width: min(260px, 90%); margin-top: 8px; }
+  input[type="range"] { touch-action: pan-y; }
+  button, .btn, .navbtn, .iconbtn { -webkit-tap-highlight-color: transparent; }
+}
+@media (max-width: 360px) {
+  .navbtn { font-size: 8px; }
+  .navbtn::before { font-size: 16px; }
+  .player { gap: 6px; }
+  .playerinfo strong { font-size: 11px; }
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="top"><div class="brand"><b>B</b>linfy</div><div class="tag">YOUR MUSIC SPACE</div></header>
+ <nav id="nav">
+  <button class="navbtn active" data-page="home">Главная</button>
+  <button class="navbtn" data-page="library">Библиотека</button>
+  <button class="navbtn" data-page="playlists">Плейлисты</button>
+  <button class="navbtn" data-page="add">Добавить</button>
+  <button class="navbtn" data-page="rooms">Rooms</button>
+  <button class="navbtn" data-page="profile">Профиль</button>
+ </nav>
+ <main>
+  <section id="page-home">
+   <div class="hero"><div class="eyebrow">ТВОЙ ВАЙБ</div><h1>Музыка — в твоём ритме.</h1><p>Твоя библиотека, любимые треки и плейлисты — в одном месте.</p></div>
+   <div class="section"><div class="row" style="justify-content:space-between"><h2>Недавно добавлено</h2><button class="btn ghost" data-go="library">Вся библиотека</button></div><div id="recentTracks"></div></div>
+   <div class="section"><div class="row" style="justify-content:space-between"><h2>Твои плейлисты</h2><button class="btn ghost" data-go="playlists">Все плейлисты</button></div><div id="homePlaylists" class="grid"></div></div>
+  </section>
+  <section id="page-library" class="hidden"><h1>Библиотека</h1><p class="sub">Твоя музыка хранится на этом устройстве.</p><input id="librarySearch" class="field" placeholder="Найти трек или исполнителя…"><div id="libraryTracks" class="section"></div></section>
+  <section id="page-playlists" class="hidden"><div class="row" style="justify-content:space-between"><div><h1>Плейлисты</h1><p class="sub">Собери музыку под своё настроение.</p></div><button class="btn" id="createPlaylist">＋ Создать</button></div><div id="playlistList"></div></section>
+  <section id="page-add" class="hidden"><h1>Добавить музыку</h1><p class="sub">Выбери аудиофайлы на своём устройстве.</p><div class="uploadbox"><div style="font-size:34px">♫</div><strong>Добавь свои треки</strong><div class="muted">Поддерживаются MP3, FLAC, WAV и другие аудиофайлы</div><label class="btn filelabel">Выбрать файлы<input id="fileInput" type="file" accept="audio/*,.flac,.wav,.mp3,.m4a,.ogg" multiple hidden></label><div class="notice">Файлы сохраняются в хранилище этого браузера. Не очищай данные сайта, если хочешь сохранить библиотеку.</div></div><div id="uploadStatus" class="notice"></div></section>
+  <section id="page-rooms" class="hidden"><h1>Blinfy Rooms</h1><p class="sub">Совместное прослушивание — следующий этап разработки.</p><div class="panel"><strong>Комнаты скоро появятся</strong><p class="muted">Сначала надёжно сделаем библиотеку и воспроизведение локальных файлов.</p></div></section>
+  <section id="page-profile" class="hidden"><h1>Профиль</h1><div class="panel"><strong>Blinfy на этом устройстве</strong><p class="muted">Плейлисты и аудиофайлы сохраняются локально в этом браузере. Сейчас они не синхронизируются между устройствами.</p></div></section>
+ </main>
+</div>
+<div class="player" id="player">
+ <div class="mini" id="playerCover">B</div>
+ <div class="playerinfo"><strong id="playerTitle">Ничего не играет</strong><small id="playerArtist">Выбери трек из библиотеки</small></div>
+ <div class="mini-controls">
+  <button class="mini-play" id="miniPlay" aria-label="Воспроизвести">▶</button>
+  <input class="mini-seek" id="miniSeek" type="range" min="0" max="1000" value="0" aria-label="Перемотка">
+  <span class="mini-time" id="miniTime">0:00</span>
+ </div>
+ <div class="volume-box" onclick="event.stopPropagation()">
+  <button class="volume-icon" id="muteBtn" aria-label="Выключить звук" title="Звук"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9v6h4l5 4V5l-5 4h-4Z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 5.8a9 9 0 0 1 0 12.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  <input class="volume-seek" id="volumeSeek" type="range" min="0" max="100" value="70" aria-label="Громкость">
+ </div>
+ <audio id="audio" preload="metadata"></audio>
+</div>
+<div id="fullPlayer" class="full-player hidden"><div class="full-inner">
+ <div class="full-top"><button class="full-close" id="closeFull" aria-label="Свернуть плеер"></button><span class="muted">BLINFY PLAYER</span><button class="iconbtn" id="showQueue">☷</button></div>
+ <div class="full-cover" id="fullCover">B</div>
+ <div class="full-info"><div class="grow"><div class="full-title" id="fullTitle">Ничего не играет</div><div class="full-artist" id="fullArtist">Выбери трек из библиотеки</div></div><span style="color:#ff4560;font-size:24px">♥</span></div>
+ <input class="full-seek" id="fullSeek" type="range" min="0" max="1000" value="0">
+ <div class="full-times"><span id="elapsed">0:00</span><span id="duration">0:00</span></div>
+ <div class="full-controls"><button id="prevTrack">⏮</button><button class="main-play" id="togglePlay">Ⅱ</button><button id="nextTrack">⏭</button></div>
+ <div class="full-volume"><span class="volume-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9v6h4l5 4V5l-5 4h-4Z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 5.8a9 9 0 0 1 0 12.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><input class="volume-seek" id="fullVolumeSeek" type="range" min="0" max="100" value="70" aria-label="Громкость"><span id="volumeValue">70%</span></div>
+ <div class="full-queue" id="fullQueue"><strong>Далее</strong><div class="muted">Треки из библиотеки</div></div>
+</div></div>
+<div id="modal" class="modal hidden"><div class="modalbox"><h2 id="modalTitle">Выбери плейлист</h2><div id="modalBody"></div><div class="modalactions"><button class="btn secondary" id="modalCancel">Отмена</button></div></div></div>
+<script>
+const DB_NAME='blinfy-db-v2', STORE='tracks', META='meta';
+let db, tracks=[], playlists=[], currentTrackId=null, currentObjectUrl=null, pendingTrackId=null;
+const $=id=>document.getElementById(id);
+function cleanName(filename){
+ let name=filename.replace(/\.[^.]+$/,'').replace(/[_]+/g,' ').replace(/\s+/g,' ').trim();
+ name=name.replace(/\b\d{5,}\b/g,'').replace(/\s+/g,' ').trim();
+ const parts=name.split(/\s+[—–-]\s+/);
+ if(parts.length>1) return {artist:parts[0].trim(),title:parts.slice(1).join(' — ').trim()};
+ return {artist:'Неизвестный исполнитель',title:name||filename};
+}
+
+function blobToDataURL(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.readAsDataURL(blob);});}
+function u32(v,o){return v.getUint32(o,false);}
+function syncsafe(b,o){return (b[o]&127)<<21|(b[o+1]&127)<<14|(b[o+2]&127)<<7|(b[o+3]&127);}
+function decodeText(bytes,encoding){
+ try{
+  if(encoding===0)return new TextDecoder('windows-1252').decode(bytes).replace(/\0/g,'').trim();
+  if(encoding===3)return new TextDecoder('utf-8').decode(bytes).replace(/\0/g,'').trim();
+  if(encoding===1)return new TextDecoder('utf-16').decode(bytes).replace(/\0/g,'').trim();
+  if(encoding===2)return new TextDecoder('utf-16be').decode(bytes).replace(/\0/g,'').trim();
+ }catch(e){}
+ return '';
+}
+function imageMime(b){
+ if(b.length>3&&b[0]===0xff&&b[1]===0xd8)return 'image/jpeg';
+ if(b.length>8&&b[0]===0x89&&String.fromCharCode(...b.slice(1,4))==='PNG')return 'image/png';
+ if(b.length>12&&String.fromCharCode(...b.slice(0,4))==='RIFF'&&String.fromCharCode(...b.slice(8,12))==='WEBP')return 'image/webp';
+ if(b.length>5&&String.fromCharCode(...b.slice(0,3))==='GIF')return 'image/gif';
+ return null;
+}
+async function validImageData(bytes){
+ const mime=imageMime(bytes);if(!mime||!bytes.length)return null;
+ const blob=new Blob([bytes],{type:mime});
+ try{if(window.createImageBitmap){const bitmap=await createImageBitmap(blob);bitmap.close();}}
+ catch(e){return null;}
+ return await blobToDataURL(blob);
+}
+async function parseID3Tags(b,v){
+ const result={title:'',artist:'',cover:null};
+ if(b.length<10||String.fromCharCode(...b.slice(0,3))!=='ID3')return result;
+ const ver=b[3],flags=b[5],end=Math.min(b.length,10+syncsafe(b,6));let pos=10;
+ // ID3 unsynchronisation is uncommon for current files; skip tag-level unsynchronised data safely.
+ if(flags&0x80)return result;
+ while(pos<end-6){
+  let id,size,header;
+  if(ver===2){id=String.fromCharCode(...b.slice(pos,pos+3));size=b[pos+3]<<16|b[pos+4]<<8|b[pos+5];header=6;}
+  else{id=String.fromCharCode(...b.slice(pos,pos+4));size=ver===4?syncsafe(b,pos+4):u32(v,pos+4);header=10;}
+  if(!id.trim()||!id.charCodeAt(0)||!size||pos+header+size>end)break;
+  const data=b.slice(pos+header,pos+header+size);
+  const titleFrame=ver===2?'TT2':'TIT2',artistFrame=ver===2?'TP1':'TPE1',pictureFrame=ver===2?'PIC':'APIC';
+  if((id===titleFrame||id===artistFrame)&&data.length>1){
+   const value=decodeText(data.slice(1),data[0]);
+   if(id===titleFrame)result.title=value;
+   if(id===artistFrame)result.artist=value;
+  }
+  if(id===pictureFrame&&data.length>10){
+   let q=1,mime='image/jpeg';
+   if(ver===2){
+    const fmt=String.fromCharCode(...data.slice(q,q+3)).toLowerCase();q+=3;mime=fmt==='png'?'image/png':'image/jpeg';
+   }else{
+    const mimeEnd=data.indexOf(0,q);if(mimeEnd<0){pos+=header+size;continue;}
+    const mt=String.fromCharCode(...data.slice(q,mimeEnd));if(mt.startsWith('image/'))mime=mt;q=mimeEnd+1;
+   }
+   q++; // picture type
+   const enc=data[0];
+   if(enc===1||enc===2){
+    while(q+1<data.length&&!(data[q]===0&&data[q+1]===0))q+=2;
+    q+=2;
+   }else{
+    while(q<data.length&&data[q]!==0)q++;
+    q++;
+   }
+   if(q<data.length){
+    const imageBytes=data.slice(q);
+    const detected=imageMime(imageBytes);
+    if(detected)result.cover=await validImageData(imageBytes);
+   }
+  }
+  pos+=header+size;
+ }
+ return result;
+}
+async function parseFlacTags(b,v){
+ const result={title:'',artist:'',cover:null};
+ if(b.length<8||String.fromCharCode(...b.slice(0,4))!=='fLaC')return result;
+ let pos=4,done=false;
+ while(pos+4<=b.length&&!done){
+  const h=b[pos],type=h&0x7f,len=b[pos+1]<<16|b[pos+2]<<8|b[pos+3];pos+=4;
+  if(pos+len>b.length)break;
+  const end=pos+len;
+  if(type===4){
+   let q=pos;if(q+4>end)break;const vendor=u32(v,q);q+=4+vendor;if(q+4>end)break;
+   const count=u32(v,q);q+=4;
+   for(let i=0;i<count&&q+4<=end;i++){
+    const n=u32(v,q);q+=4;if(q+n>end)break;
+    const item=new TextDecoder().decode(b.slice(q,q+n));q+=n;
+    const eq=item.indexOf('=');if(eq<0)continue;
+    const key=item.slice(0,eq).toUpperCase(),val=item.slice(eq+1);
+    if(key==='TITLE')result.title=val;
+    if(key==='ARTIST')result.artist=val;
+   }
+  }
+  if(type===6){
+   try{
+    let q=pos+4;const mimeLen=u32(v,q);q+=4+mimeLen;
+    const descLen=u32(v,q);q+=4+descLen+16;
+    const n=u32(v,q);q+=4;
+    if(n>0&&q+n<=end)result.cover=await validImageData(b.slice(q,q+n));
+   }catch(e){}
+  }
+  pos=end;done=!!(h&0x80);
+ }
+ return result;
+}
+async function readAudioTags(file){
+ try{
+  const buf=await file.arrayBuffer(),b=new Uint8Array(buf),v=new DataView(buf);
+  const id3=await parseID3Tags(b,v);
+  if(id3.title||id3.artist||id3.cover)return id3;
+  return await parseFlacTags(b,v);
+ }catch(e){console.warn('Не удалось прочитать теги',e);return {title:'',artist:'',cover:null};}
+}
+async function findOnlineCover(t){
+ try{
+  if(!t.title||!t.artist||t.artist==='Неизвестный исполнитель')return null;
+  const q=encodeURIComponent(t.artist+' '+t.title);
+  const r=await fetch('https://itunes.apple.com/search?term='+q+'&media=music&entity=song&limit=10');
+  if(!r.ok)return null;
+  const d=await r.json();
+  const norm=s=>String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-яе0-9]/gi,'');
+  const title=norm(t.title),artist=norm(t.artist);
+  const x=(d.results||[]).find(x=>norm(x.trackName)===title&&norm(x.artistName)===artist)
+    ||(d.results||[]).find(x=>norm(x.trackName).includes(title)&&norm(x.artistName).includes(artist));
+  if(!x?.artworkUrl100)return null;
+  const base=x.artworkUrl100;
+  const candidates=[base.replace(/\d+x\d+bb/,'1200x1200bb'),base.replace(/\d+x\d+bb/,'600x600bb'),base];
+  for(const url of candidates){const ok=await new Promise(resolve=>{const im=new Image();im.onload=()=>resolve(im.naturalWidth>=400&&im.naturalHeight>=400);im.onerror=()=>resolve(false);im.src=url;});if(ok)return url;}
+  return null;
+ }catch(e){console.warn('Поиск обложки недоступен в этом режиме браузера',e);return null;}
+}
+async function coverResolution(data){
+ if(!data)return 0;
+ return await new Promise(resolve=>{const im=new Image();im.onload=()=>resolve(Math.min(im.naturalWidth,im.naturalHeight));im.onerror=()=>resolve(0);im.src=data;});
+}
+function setCover(el,cover){el.innerHTML=cover?`<img src="${esc(cover)}" alt="Обложка" onerror="this.parentElement.textContent='B'">`:'B';}
+function fmtTime(n){if(!Number.isFinite(n))return'0:00';return Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');}
+function syncFull(){const t=tracks.find(x=>x.id===currentTrackId),a=$('audio');if($('miniPlay'))$('miniPlay').textContent=a.paused?'▶':'Ⅱ';if($('miniSeek')){const pct=a.duration?Math.round(a.currentTime/a.duration*1000):0;$('miniSeek').value=pct;$('miniSeek').style.setProperty('--progress',(pct/10)+'%');$('miniTime').textContent=fmtTime(a.currentTime);}if(t){$('fullTitle').textContent=t.title;$('fullArtist').textContent=t.artist;setCover($('fullCover'),t.cover);} $('togglePlay').textContent=a.paused?'▶':'Ⅱ';$('elapsed').textContent=fmtTime(a.currentTime);$('duration').textContent=fmtTime(a.duration);$('fullSeek').value=a.duration?Math.round(a.currentTime/a.duration*1000):0;}
+function openFull(){if(!currentTrackId)return;$('fullPlayer').classList.remove('hidden');syncFull();renderFullQueue();}
+function renderFullQueue(){const i=tracks.findIndex(x=>x.id===currentTrackId),next=i<0?tracks.slice(0,3):tracks.slice(i+1,i+4);$('fullQueue').innerHTML='<strong>Далее</strong>'+(next.length?next.map(t=>`<div class="track"><div class="mini">${t.cover?`<img src="${esc(t.cover)}" alt="">`:'B'}</div><div class="grow"><div class="trackname">${esc(t.title)}</div><div class="trackmeta">${esc(t.artist)}</div></div></div>`).join(''):'<div class="muted" style="margin-top:8px">Очередь пока пуста</div>');}
+function playStep(n){if(!tracks.length)return;let i=tracks.findIndex(x=>x.id===currentTrackId);i=i<0?0:(i+n+tracks.length)%tracks.length;playTrack(tracks[i].id);syncFull();renderFullQueue();}
+
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id'});if(!d.objectStoreNames.contains(META))d.createObjectStore(META,{keyPath:'key'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+function tx(store,mode='readonly'){return db.transaction(store,mode).objectStore(store);}
+function getAll(store){return new Promise((res,rej)=>{const r=tx(store).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function saveTrack(t){return new Promise((res,rej)=>{const r=tx(STORE,'readwrite').put(t);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+function deleteTrack(id){return new Promise((res,rej)=>{const r=tx(STORE,'readwrite').delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+async function saveMeta(){return new Promise((res,rej)=>{const r=tx(META,'readwrite').put({key:'playlists',value:playlists});r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+async function loadMeta(){return new Promise(res=>{const r=tx(META).get('playlists');r.onsuccess=()=>res(r.result?.value||[]);r.onerror=()=>res([]);});}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function coverHTML(t,cls='mini'){return `<div class="${cls}">${t.cover?`<img src="${t.cover}" alt="">`:'B'}</div>`;}
+function trackRow(t){return `<div class="track"><div class="mini">${t.cover?`<img src="${t.cover}" alt="">`:'B'}</div><div class="grow"><div class="trackname">${esc(t.title)}</div><div class="trackmeta">${esc(t.artist)} · ${esc(t.fileName)}</div></div><button class="iconbtn" data-play="${t.id}" title="Слушать">▶</button><button class="iconbtn" data-add="${t.id}" title="Добавить в плейлист">＋</button><button class="iconbtn" data-delete="${t.id}" title="Удалить">×</button></div>`;}
+function playlistCard(p){return `<div class="tile"><div class="cover">♫</div><strong>${esc(p.name)}</strong><small>${p.trackIds.length} треков</small><div style="margin-top:12px"><button class="btn secondary" data-open-playlist="${p.id}">Открыть</button></div></div>`;}
+function render(){
+ const recent=[...tracks].sort((a,b)=>b.added-a.added).slice(0,5);
+ $('recentTracks').innerHTML=recent.length?recent.map(trackRow).join(''):'<div class="empty">Здесь появятся твои недавно добавленные песни.</div>';
+ $('libraryTracks').innerHTML=tracks.length?tracks.map(trackRow).join(''):'<div class="empty">Библиотека пока пуста. Добавь первый трек во вкладке «Добавить».</div>';
+ $('homePlaylists').innerHTML=playlists.length?playlists.map(playlistCard).join(''):'<div class="empty" style="grid-column:1/-1">Пока нет плейлистов. Создай первый!</div>';
+ $('playlistList').innerHTML=playlists.length?playlists.map(p=>`<div class="playlistline"><div><strong>${esc(p.name)}</strong><div class="trackmeta">${p.trackIds.length} треков</div></div><div class="row"><button class="btn secondary" data-open-playlist="${p.id}">Открыть</button><button class="iconbtn" data-delete-playlist="${p.id}">×</button></div></div>`).join(''):'<div class="empty">Создай свой первый плейлист.</div>';
+}
+function showPage(page){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));$('page-'+page).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));}
+function playTrack(id){const t=tracks.find(x=>x.id===id);if(!t)return;if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=URL.createObjectURL(t.blob);$('audio').src=currentObjectUrl;$('playerTitle').textContent=t.title;$('playerArtist').textContent=t.artist;setCover($('playerCover'),t.cover);currentTrackId=id;$('audio').play().catch(()=>{});syncFull();renderFullQueue();}
+function openModal(title,body){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modal').classList.remove('hidden');}
+function closeModal(){$('modal').classList.add('hidden');}
+function addToPlaylist(id){pendingTrackId=id;if(!playlists.length){openModal('Сначала создай плейлист','<p class="muted">У тебя пока нет плейлистов.</p><button class="btn" id="modalCreate">＋ Создать плейлист</button>');return;}openModal('Добавить в плейлист',playlists.map(p=>`<div class="playlistline"><strong>${esc(p.name)}</strong><button class="btn secondary" data-pick-playlist="${p.id}">Добавить</button></div>`).join(''));}
+function createPlaylist(){const name=prompt('Название плейлиста:');if(!name||!name.trim())return;playlists.push({id:crypto.randomUUID(),name:name.trim(),trackIds:[]});saveMeta().then(render);}
+function openPlaylist(id){const p=playlists.find(x=>x.id===id);if(!p)return;const list=p.trackIds.map(tid=>tracks.find(t=>t.id===tid)).filter(Boolean);openModal(p.name, list.length?list.map(trackRow).join(''):'<div class="empty">В этом плейлисте пока нет песен. Добавь их кнопкой ＋ рядом с треком.</div>');}
+document.addEventListener('click',async e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.page)showPage(b.dataset.page);
+ if(b.dataset.go)showPage(b.dataset.go);
+ if(b.id==='createPlaylist'||b.id==='modalCreate'){closeModal();createPlaylist();}
+ if(b.id==='modalCancel')closeModal();
+ if(b.dataset.play)playTrack(b.dataset.play);
+ if(b.dataset.add)addToPlaylist(b.dataset.add);
+ if(b.dataset.pickPlaylist){const p=playlists.find(x=>x.id===b.dataset.pickPlaylist);if(p&&pendingTrackId&&!p.trackIds.includes(pendingTrackId)){p.trackIds.push(pendingTrackId);await saveMeta();render();}closeModal();}
+ if(b.dataset.openPlaylist)openPlaylist(b.dataset.openPlaylist);
+ if(b.dataset.delete){const t=tracks.find(x=>x.id===b.dataset.delete);if(t&&confirm(`Удалить «${t.title}» из библиотеки?`)){await deleteTrack(t.id);tracks=tracks.filter(x=>x.id!==t.id);playlists.forEach(p=>p.trackIds=p.trackIds.filter(id=>id!==t.id));await saveMeta();render();}}
+ if(b.dataset.deletePlaylist&&confirm('Удалить плейлист?')){playlists=playlists.filter(p=>p.id!==b.dataset.deletePlaylist);await saveMeta();render();}
+});
+$('fileInput').addEventListener('change',async e=>{
+ const files=[...e.target.files];let count=0;
+ for(const file of files){if(!file.type.startsWith('audio/')&&!/\.(mp3|flac|wav|m4a|ogg|aac)$/i.test(file.name))continue;
+  const meta=cleanName(file.name);const tags=await readAudioTags(file);const t={id:crypto.randomUUID(),fileName:file.name,title:tags.title||meta.title,artist:tags.artist||meta.artist,blob:file,cover:tags.cover||null,added:Date.now()};
+  try{await saveTrack(t);tracks.push(t);count++;const embeddedSize=await coverResolution(t.cover);if(!t.cover||embeddedSize<700){$('uploadStatus').textContent=`Ищу обложку в высоком качестве: ${t.title}…`;const cover=await findOnlineCover(t);if(cover){t.cover=cover;await saveTrack(t);render();}}}catch(err){$('uploadStatus').textContent='Не удалось сохранить файл. Возможно, не хватает места в хранилище браузера.';}
+ }
+ $('uploadStatus').textContent=count?`Добавлено треков: ${count}.`:'Не удалось добавить файлы.';e.target.value='';render();showPage('library');
+});
+$('librarySearch').addEventListener('input',e=>{const q=e.target.value.toLowerCase();const filtered=tracks.filter(t=>(t.title+' '+t.artist+' '+t.fileName).toLowerCase().includes(q));$('libraryTracks').innerHTML=filtered.length?filtered.map(trackRow).join(''):'<div class="empty">Ничего не найдено.</div>';});
+
+
+$('player').addEventListener('click',e=>{if(!e.target.closest('button,input'))openFull();});
+$('closeFull').addEventListener('click',()=>$('fullPlayer').classList.add('hidden'));
+$('showQueue').addEventListener('click',()=>$('fullQueue').scrollIntoView({behavior:'smooth',block:'nearest'}));
+$('togglePlay').addEventListener('click',()=>{const a=$('audio');if(a.paused)a.play().catch(()=>{});else a.pause();syncFull();});
+$('miniPlay').addEventListener('click',e=>{e.stopPropagation();const a=$('audio');if(a.paused)a.play().catch(()=>{});else a.pause();syncFull();});
+$('miniSeek').addEventListener('click',e=>e.stopPropagation());$('miniSeek').addEventListener('input',e=>{const a=$('audio');if(a.duration)a.currentTime=Number(e.target.value)/1000*a.duration;syncFull();});
+function setVolume(value){
+ const a=$('audio'),v=Math.max(0,Math.min(100,Number(value)))/100;
+ a.volume=v;
+ $('volumeSeek').value=Math.round(v*100);
+ $('fullVolumeSeek').value=Math.round(v*100);
+ $('volumeSeek').style.setProperty('--volume',(v*100)+'%');
+ $('fullVolumeSeek').style.setProperty('--volume',(v*100)+'%');
+ $('volumeValue').textContent=Math.round(v*100)+'%';
+ $('muteBtn').innerHTML=v===0?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9v6h4l5 4V5l-5 4h-4Z" fill="currentColor"/><path d="m16 9 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9v6h4l5 4V5l-5 4h-4Z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.8 5.8a9 9 0 0 1 0 12.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';$('muteBtn').setAttribute('aria-label',v===0?'Включить звук':'Выключить звук');
+ try{localStorage.setItem('blinfy-volume',String(v));}catch(e){}
+}
+$('volumeSeek').addEventListener('click',e=>e.stopPropagation());
+$('volumeSeek').addEventListener('input',e=>setVolume(e.target.value));
+$('fullVolumeSeek').addEventListener('input',e=>setVolume(e.target.value));
+$('muteBtn').addEventListener('click',e=>{e.stopPropagation();const a=$('audio');if(a.volume>0){a.dataset.lastVolume=a.volume;setVolume(0);}else setVolume((Number(a.dataset.lastVolume)||0.7)*100);});
+try{setVolume(Number(localStorage.getItem('blinfy-volume')??70));}catch(e){setVolume(70);}
+
+$('prevTrack').addEventListener('click',()=>playStep(-1));$('nextTrack').addEventListener('click',()=>playStep(1));
+$('fullSeek').addEventListener('input',e=>{const a=$('audio');if(a.duration)a.currentTime=Number(e.target.value)/1000*a.duration;});
+$('audio').addEventListener('timeupdate',syncFull);$('audio').addEventListener('loadedmetadata',syncFull);$('audio').addEventListener('play',syncFull);$('audio').addEventListener('pause',syncFull);$('audio').addEventListener('ended',()=>playStep(1));
+
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal();});
+(async()=>{try{db=await openDB();tracks=await getAll(STORE);playlists=await loadMeta();render();}catch(e){console.error(e);alert('Браузер не смог открыть локальное хранилище. Попробуй обновить страницу.');}})();
+</script>
+</body></html>
