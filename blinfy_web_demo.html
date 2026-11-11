@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<title>blinfy — твой музыкальный мир</title>
+<style>
+:root{--bg:#090909;--panel:#151515;--panel2:#202020;--red:#ff3444;--muted:#999;--white:#f7f7f7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:100px}
+button,input{font:inherit}button{border:0;cursor:pointer;color:inherit}
+.app{max-width:760px;margin:auto;padding:22px 18px 30px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:9px;font-size:25px;font-weight:800;letter-spacing:-1px}
+.logo{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#ff5864,#c90020);font-size:25px;font-weight:900}
+.avatar{width:38px;height:38px;border-radius:50%;background:#242424;display:grid;place-items:center;color:#fff}
+.eyebrow{color:var(--red);font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:800}
+h1{font-size:34px;line-height:1.05;letter-spacing:-1.5px;margin:8px 0 18px}
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:22px;min-height:220px;background:radial-gradient(ellipse at 85% 20%,#9b1028 0%,transparent 42%),linear-gradient(130deg,#351018,#171014 58%,#090909);display:flex;flex-direction:column;justify-content:space-between}
+.hero:after{content:"b";position:absolute;right:8px;top:-50px;font-size:260px;font-weight:900;color:#ffffff0b;line-height:1}
+.hero p{color:#e8cdd0;max-width:230px;margin:0;line-height:1.5;position:relative;z-index:1}
+.primary{background:var(--red);padding:13px 18px;border-radius:14px;font-weight:750;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:1}
+.section{margin-top:30px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+h2{font-size:20px;margin:0;letter-spacing:-.5px}.muted{color:var(--muted);font-size:13px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:var(--panel);border-radius:18px;padding:16px;min-height:112px;text-align:left}
+.tile .ico{font-size:23px;margin-bottom:15px}.tile strong{display:block;font-size:15px}.tile small{color:var(--muted)}
+.track-list{display:flex;flex-direction:column;gap:9px}
+.track{display:flex;align-items:center;gap:12px;background:var(--panel);padding:10px;border-radius:15px}
+.cover{width:48px;height:48px;flex:none;border-radius:11px;background:linear-gradient(135deg,#5b101e,#171717);display:grid;place-items:center;font-size:20px}
+.track-info{min-width:0;flex:1}.track-info strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-info small{color:var(--muted)}
+.icon-btn{background:var(--panel2);width:38px;height:38px;border-radius:50%;font-size:16px}
+.empty{border:1px dashed #393939;border-radius:16px;padding:20px;text-align:center;color:var(--muted);line-height:1.5}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#101010ed;backdrop-filter:blur(16px);border-top:1px solid #262626;display:flex;justify-content:center;gap:0;padding:10px 6px calc(10px + env(safe-area-inset-bottom));z-index:5}
+.nav button{background:transparent;color:#999;flex:1;max-width:130px;padding:7px 2px;font-size:11px}.nav button span{display:block;font-size:20px;margin-bottom:4px}.nav button.active{color:var(--red)}
+.player{position:fixed;bottom:68px;left:10px;right:10px;max-width:740px;margin:auto;background:#242424;border:1px solid #3a3a3a;border-radius:17px;padding:10px 12px;display:none;align-items:center;gap:10px;z-index:4}
+.player.show{display:flex}.player .track-info{flex:1}.player button{background:transparent;font-size:20px}
+.page{display:none}.page.active{display:block}
+.field{width:100%;background:#1b1b1b;border:1px solid #393939;color:white;border-radius:13px;padding:13px;margin:8px 0 12px}
+.action{background:#252525;border-radius:13px;padding:12px 15px;font-weight:700;margin:4px 5px 4px 0}.action.red{background:var(--red)}
+.room-code{font-size:26px;letter-spacing:5px;font-weight:800;color:var(--red);padding:16px;background:#1a1a1a;border-radius:14px;text-align:center;margin:14px 0}
+.note{font-size:12px;color:#888;line-height:1.5;margin-top:12px}
+@media(min-width:650px){.app{padding-top:32px}.hero{min-height:260px;padding:30px}.tiles{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">b</div>blinfy</div><div class="avatar">♪</div></header>
+
+<main id="home" class="page active">
+<div class="eyebrow">ТВОЯ МУЗЫКА. ТВОЙ МИР.</div><h1>Твой вайб<span style="color:var(--red)">.</span></h1>
+<section class="hero"><div><div class="eyebrow" style="color:#ff8992">BLINFY ROOMS</div><h2 style="font-size:26px;margin:9px 0">Музыка ближе,<br>даже на расстоянии.</h2><p>Создай комнату и пригласи близкого человека в свой музыкальный момент.</p></div><button class="primary" onclick="showPage('rooms')">Открыть Rooms <span>→</span></button></section>
+<section class="section"><div class="section-head"><h2>Твоя библиотека</h2><span class="muted" id="trackCount">0 треков</span></div><div class="tiles">
+<button class="tile" onclick="showPage('library')"><div class="ico">🎵</div><strong>Мои треки</strong><small>Локальная музыка</small></button>
+<button class="tile" onclick="createPlaylist()"><div class="ico">＋</div><strong>Новый плейлист</strong><small>Собери свой вайб</small></button>
+<button class="tile" onclick="showPage('rooms')"><div class="ico">🫂</div><strong>Rooms</strong><small>Слушать вместе</small></button>
+<button class="tile" onclick="showPage('search')"><div class="ico">⌕</div><strong>Добавить музыку</strong><small>Файлы с устройства</small></button>
+</div></section>
+<section class="section"><div class="section-head"><h2>Недавно добавлено</h2><button class="muted" style="background:none" onclick="showPage('library')">Все →</button></div><div id="recent" class="empty">Здесь появятся твои треки.<br>Добавь первый аудиофайл в библиотеку.</div></section>
+</main>
+
+<main id="library" class="page"><div class="eyebrow">ТВОЯ КОЛЛЕКЦИЯ</div><h1>Библиотека<span style="color:var(--red)">.</span></h1><div class="section-head"><h2>Мои треки</h2><span class="muted" id="libraryCount">0</span></div><div id="libraryTracks" class="empty">Пока здесь пусто. Добавь аудиофайл — и он появится в библиотеке.</div><div class="section"><h2>Плейлисты</h2><div id="playlists" class="empty" style="margin-top:12px">Плейлистов пока нет.</div><button class="action red" onclick="createPlaylist()">＋ Создать плейлист</button></div></main>
+
+<main id="search" class="page"><div class="eyebrow">ПОПОЛНИ СВОЮ КОЛЛЕКЦИЮ</div><h1>Добавить музыку<span style="color:var(--red)">.</span></h1><div class="tile" style="margin-top:20px"><div class="ico">📁</div><strong>Загрузить аудиофайлы</strong><p class="muted">Выбери музыку на своём устройстве. Файлы будут проигрываться прямо в этом браузере.</p><input class="field" id="audioFiles" type="file" accept="audio/*" multiple><button class="action red" onclick="document.getElementById('audioFiles').click()">Выбрать файлы</button></div><div class="section"><h2>Ссылки на музыку</h2><p class="muted">В этой версии можно сохранить ссылку как заметку. Прямое воспроизведение из Spotify и YouTube пока не подключено.</p><input id="musicLink" class="field" placeholder="Вставь ссылку на трек"><button class="action" onclick="saveLink()">Сохранить ссылку</button></div></main>
+
+<main id="rooms" class="page"><div class="eyebrow">BLINFY TOGETHER</div><h1>Твоя комната<span style="color:var(--red)">.</span></h1><div class="tile" style="margin-top:20px"><div class="ico">🎧</div><strong>Создай комнату прослушивания</strong><p class="muted">Подготовь пространство для общего музыкального момента.</p><button class="action red" onclick="createRoom()">＋ Создать комнату</button></div><div id="roomArea" class="section"></div><p class="note">Демо-режим: эта версия создаёт локальный код комнаты и показывает сценарий приглашения. Для настоящей синхронизации с телефоном Кайли понадобится общий сервер и подключение обоих устройств.</p></main>
+
+<main id="profile" class="page"><div class="eyebrow">ТВОЙ BLINFY</div><h1>Профиль<span style="color:var(--red)">.</span></h1><div class="tile"><div class="ico">🖤</div><strong>Добро пожаловать в Blinfy</strong><p class="muted">Первая веб-версия. Твой музыкальный мир начинается здесь.</p></div><p class="note">Пока данные хранятся в памяти этой открытой страницы. Не закрывай вкладку, если хочешь сохранить текущую демо-сессию.</p></main>
+</div>
+
+<div class="player" id="player"><div class="cover">♫</div><div class="track-info"><strong id="nowTitle">Не играет</strong><small id="nowSub">Blinfy player</small></div><button onclick="togglePlay()" id="playBtn">▶</button></div>
+<nav class="nav">
+<button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>Главная</button>
+<button data-page="library" onclick="showPage('library')"><span>▤</span>Библиотека</button>
+<button data-page="search" onclick="showPage('search')"><span>⌕</span>Добавить</button>
+<button data-page="rooms" onclick="showPage('rooms')"><span>◉</span>Rooms</button>
+<button data-page="profile" onclick="showPage('profile')"><span>○</span>Профиль</button>
+</nav>
+<audio id="audio"></audio>
+<script>
+const tracks=[];let playlists=[];let current=-1;let roomCode='';
+const audio=document.getElementById('audio');
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));}
+function addTrack(file){const url=URL.createObjectURL(file);tracks.push({name:file.name.replace(/\.[^.]+$/,''),url,type:'file'});render(); }
+document.getElementById('audioFiles').addEventListener('change',e=>{[...e.target.files].forEach(addTrack);e.target.value='';showPage('library')});
+function render(){document.getElementById('trackCount').textContent=tracks.length+' треков';document.getElementById('libraryCount').textContent=tracks.length;const html=tracks.map((t,i)=>`<div class="track"><div class="cover">♫</div><div class="track-info"><strong>${escapeHtml(t.name)}</strong><small>Локальный аудиофайл</small></div><button class="icon-btn" onclick="playTrack(${i})">▶</button></div>`).join('');document.getElementById('libraryTracks').className=html?'track-list':'empty';document.getElementById('libraryTracks').innerHTML=html||'Пока здесь пусто. Добавь аудиофайл — и он появится в библиотеке.';document.getElementById('recent').className=html?'track-list':'empty';document.getElementById('recent').innerHTML=html?html.slice(-1)[0]||html:'Здесь появятся твои треки.<br>Добавь первый аудиофайл в библиотеку.';document.getElementById('playlists').innerHTML=playlists.length?playlists.map(p=>`<div class="track"><div class="cover">▤</div><div class="track-info"><strong>${escapeHtml(p.name)}</strong><small>${p.items.length} треков</small></div></div>`).join(''):'Плейлистов пока нет.';}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function playTrack(i){current=i;audio.src=tracks[i].url;audio.play().catch(()=>{});document.getElementById('player').classList.add('show');document.getElementById('nowTitle').textContent=tracks[i].name;document.getElementById('playBtn').textContent='Ⅱ';}
+function togglePlay(){if(audio.paused){audio.play();document.getElementById('playBtn').textContent='Ⅱ'}else{audio.pause();document.getElementById('playBtn').textContent='▶'}}
+audio.addEventListener('ended',()=>{if(current<tracks.length-1)playTrack(current+1);else document.getElementById('playBtn').textContent='▶'});
+function createPlaylist(){const name=prompt('Как назовём плейлист?');if(name&&name.trim()){playlists.push({name:name.trim(),items:[]});render();showPage('library')}}
+function saveLink(){const v=document.getElementById('musicLink').value.trim();if(!/^https?:\/\//i.test(v)){alert('Вставь корректную ссылку.');return}alert('Ссылка сохранена только как демо-заметка. Воспроизведение внешних сервисов пока не подключено.');document.getElementById('musicLink').value=''}
+function createRoom(){roomCode=Math.random().toString(36).slice(2,8).toUpperCase();document.getElementById('roomArea').innerHTML=`<div class="tile"><div class="eyebrow">КОМНАТА СОЗДАНА</div><h2 style="margin-top:8px">Ждём второго участника</h2><div class="room-code">${roomCode}</div><p class="muted">Отправь этот код Кайли — пока это демонстрация будущего приглашения.</p><button class="action red" onclick="copyRoom()">Скопировать код</button></div>`}
+function copyRoom(){if(navigator.clipboard){navigator.clipboard.writeText(roomCode).then(()=>alert('Код скопирован: '+roomCode)).catch(()=>alert('Код комнаты: '+roomCode))}else alert('Код комнаты: '+roomCode)}
+render();
+</script>
+</body>
+</html>
